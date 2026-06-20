@@ -41,13 +41,12 @@ içindeki üç değeri değiştirmek — kod değişmez:
 
 | Sağlayıcı | `AI_BASE_URL` | Örnek `AI_MODEL` |
 |-----------|---------------|------------------|
-| OpenAI (resmi) | `https://api.openai.com/v1` | `gpt-4.1-mini` |
+| OpenAI (varsayılan) | `https://api.openai.com/v1` | `gpt-4.1-mini` |
 | Anthropic | `https://api.anthropic.com/v1` | `claude-sonnet-4-6` |
-| VoidAI | `https://api.voidai.app/v1` | `gpt-4.1-mini` |
 | Diğer 3. parti / yerel (OpenRouter, Groq, Together, Ollama…) | sağlayıcının URL'i | sağlayıcının model adı |
 
-> Geriye dönük uyumluluk: eski `VOIDAI_API_KEY` / `VOIDAI_BASE_URL` ve standart
-> `OPENAI_API_KEY` değişkenleri de hâlâ çalışır.
+> `AI_BASE_URL` boş bırakılırsa varsayılan OpenAI kullanılır. Standart
+> `OPENAI_API_KEY` değişkeni de anahtar olarak kabul edilir.
 
 ## ⚠️ Güvenlik
 

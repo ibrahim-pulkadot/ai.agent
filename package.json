@@ -15,7 +15,7 @@
     "agent",
     "memory",
     "telegram",
-    "voidai"
+    "openai"
   ],
   "author": "ibrahim",
   "license": "MIT",
