@@ -21,11 +21,12 @@ Telegram'dan konuşulabilen kişisel bir yapay zeka asistanı.
 npm install
 ```
 
-`.env` dosyası anahtarınla birlikte hazır geldi. İçindekiler:
+`.env.example` dosyasını `.env` olarak kopyala ve kendi değerlerinle doldur. İçindekiler:
 
 ```
-VOIDAI_API_KEY=...        # VoidAI anahtarın
-AI_MODEL=gpt-5.1          # kullanılacak model
+AI_API_KEY=...            # AI sağlayıcının API anahtarı
+AI_BASE_URL=...           # sağlayıcının OpenAI-uyumlu taban URL'i
+AI_MODEL=gpt-4.1-mini     # kullanılacak model
 HISTORY_WINDOW=25         # AI'ın hatırlayacağı son mesaj sayısı
 TIMEZONE=Europe/Istanbul  # tarih hesapları için saat dilimi
 MAX_INPUT_CHARS=8000      # tek mesaj için karakter sınırı
@@ -33,12 +34,27 @@ TELEGRAM_BOT_TOKEN=       # Telegram için (CLI'da gerekmez)
 TELEGRAM_ALLOWED_IDS=     # sadece bu ID'ler kullanabilsin (boş = herkes)
 ```
 
+### AI sağlayıcısı (sağlayıcıdan bağımsız)
+
+Mira herhangi bir **OpenAI-uyumlu** sağlayıcıyla çalışır. Tek yapman gereken `.env`
+içindeki üç değeri değiştirmek — kod değişmez:
+
+| Sağlayıcı | `AI_BASE_URL` | Örnek `AI_MODEL` |
+|-----------|---------------|------------------|
+| OpenAI (resmi) | `https://api.openai.com/v1` | `gpt-4.1-mini` |
+| Anthropic | `https://api.anthropic.com/v1` | `claude-sonnet-4-6` |
+| VoidAI | `https://api.voidai.app/v1` | `gpt-4.1-mini` |
+| Diğer 3. parti / yerel (OpenRouter, Groq, Together, Ollama…) | sağlayıcının URL'i | sağlayıcının model adı |
+
+> Geriye dönük uyumluluk: eski `VOIDAI_API_KEY` / `VOIDAI_BASE_URL` ve standart
+> `OPENAI_API_KEY` değişkenleri de hâlâ çalışır.
+
 ## ⚠️ Güvenlik
 
-- **`.env` dosyanı kimseyle paylaşma.** İçindeki `VOIDAI_API_KEY` canlı bir anahtardır;
+- **`.env` dosyanı kimseyle paylaşma.** İçindeki `AI_API_KEY` canlı bir anahtardır;
   ele geçiren senin kotanı/paranı harcayabilir. Projeyi zip'leyip/yedekleyip paylaşırsan
   `.env` dosyasını çıkar. `.gitignore` zaten `.env`'i git'e göndermeyi engeller.
-- Anahtarın bir şekilde sızdıysa VoidAI panelinden **iptal edip yenisini üret**.
+- Anahtarın bir şekilde sızdıysa sağlayıcının panelinden **iptal edip yenisini üret**.
 - Telegram botunu sadece kendin kullanacaksan `.env`'de `TELEGRAM_ALLOWED_IDS`'e kendi
   Telegram ID'ni ekle; boş bırakırsan botu bulan herkes hafızana erişebilir (başlangıçta uyarı verilir).
 

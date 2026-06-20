@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { config } from "./config.js";
 
-// VoidAI baglantisini ve secili modeli hizlica test eder.
+// Yapilandirilan AI saglayici baglantisini ve secili modeli hizlica test eder.
 const client = new OpenAI({ apiKey: config.apiKey, baseURL: config.baseURL });
 
 console.log(`Model: ${config.model}`);

@@ -10,9 +10,13 @@ export const MEMORY_FILE = join(ROOT, "memory.json");
 export const HISTORY_DIR = join(ROOT, "history");
 export const PERSONA_FILE = join(ROOT, "persona.json");
 
+// AI saglayicidan bagimsizdir: OpenAI, Anthropic (OpenAI-uyumlu uc nokta), VoidAI veya
+// herhangi bir OpenAI-uyumlu 3. parti saglayici sadece .env degistirilerek calisir.
+// Geriye donuk uyumluluk: eski VOIDAI_* ve standart OPENAI_API_KEY de desteklenir.
 export const config = {
-  apiKey: process.env.VOIDAI_API_KEY,
-  baseURL: process.env.VOIDAI_BASE_URL || "https://api.voidai.app/v1",
+  apiKey: process.env.AI_API_KEY || process.env.VOIDAI_API_KEY || process.env.OPENAI_API_KEY,
+  baseURL:
+    process.env.AI_BASE_URL || process.env.VOIDAI_BASE_URL || "https://api.voidai.app/v1",
   model: process.env.AI_MODEL || "gpt-4.1-mini",
   historyWindow: Number(process.env.HISTORY_WINDOW || 25),
   timezone: process.env.TIMEZONE || "Europe/Istanbul",
@@ -26,7 +30,7 @@ export const config = {
 
 if (!config.apiKey) {
   console.error(
-    "HATA: VOIDAI_API_KEY ayarlanmamis. .env dosyasini olusturup anahtarini gir."
+    "HATA: AI API anahtari ayarlanmamis. .env dosyasinda AI_API_KEY (veya VOIDAI_API_KEY / OPENAI_API_KEY) ayarla."
   );
   process.exit(1);
 }
